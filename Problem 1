@@ -1,0 +1,161 @@
+#include <iostream>
+#include <conio.h>
+
+#include <algorithm>    // std::sort
+#include <vector>	
+using namespace std;
+int main()
+{
+string arr[50];
+double indrep[10];
+double greports[10];
+double quiz[2];
+double aveArr[50];
+			
+
+		//Input Name
+		for(int i = 0; i< 50; i++)
+		{
+		
+			double ave = 0;
+			double sum = 0;
+			cout<<"\n\nStudent name: ";
+			cin>>arr[i];
+			
+			{
+				cout << "\n"; //Para may spaces in between grade components, mas maganda tingnan 
+			}
+			
+			//Individual Reports Computation
+			for(int j = 0; j < 10; j++)
+			{
+				cout<<"Add individual report: ";
+				cin>>indrep[j];
+				sum = sum +indrep[i];
+			}
+			double indrepG; indrepG = (sum/10)*.15;
+			ave+=indrepG;
+			
+			cout<<"Final Value for Individual Reports: "<<indrepG <<"%";
+			
+			{
+				cout << "\n\n";
+			}
+			
+			//Group Reports Computation
+			for(int k = 0; k < 10; k++)
+			{
+				double sum =0;
+				cout<<"Add group reports: ";
+				cin>>greports[k];
+				sum = sum + greports[i];
+			}
+			double greportsG; greportsG = (sum/10)*.25;
+			ave+=greportsG;
+			cout<<"Final Value for Group Reports: "<< greportsG <<"%";
+			
+			{
+				cout << "\n\n";
+			}
+			
+			//Quizzes Computation
+			for(int l = 0; l < 2; l++)
+			{
+				double sum =0;
+				cout<<"Add quiz: ";
+				cin>>quiz[l];
+				sum = sum + quiz[i];
+			}
+			double quizG; quizG = (sum/2)*.20*.20; //Ma'am di ko alam bakit mali pag isang .2 lang pero pag dalawa tama, so weird
+			ave+=quizG;
+			cout<<"Final Value for Quizzes: "<< quizG <<"%";
+			
+			{
+				cout << "\n\n";
+			}
+			
+			//Major Examination Computation
+			
+			{
+				double prelimWr, prelimPr, finalWr, finalPr;
+				cout << "Add Preliminary Written Examination (n/30): ";
+				cin >> prelimWr;
+				cout << "Add Preliminary Practical Examination (n/70): ";
+				cin >> prelimPr;
+				cout << "Add Final Written Examinationn (/30): ";
+				cin >> finalWr;
+				cout << "Add Final Practical Examination (n/70): ";
+				cin >> finalPr;
+				double majex; majex = ((prelimWr+prelimPr+finalPr+finalWr)/2)*.40;
+				ave+=majex;
+				cout << "Final Value for Major Examination: " << majex <<"%";
+				aveArr[i] = ave;
+			}
+			
+			{
+				cout << "\n";
+			}
+			
+			cout << "\nFinal Grade: " << ave << "%";	
+		
+			if (aveArr[i] >= 95.57 && aveArr[i] <= 100)
+			{
+				cout << "\n\nGrade Point Average is: 1.00";
+			}
+		
+
+			else if (aveArr[i] >= 91.12 && aveArr[i] <= 95.56)
+			{
+				cout << "\n\nGrade Point Average is: 1.25";
+			}
+		
+
+			else if (aveArr[i] >= 86.68 && aveArr[i] <= 91.11)
+			{
+				cout << "\n\nGrade Point Average is: 1.50";
+			}
+		
+
+			else if (aveArr[i] >= 82.23 && aveArr[i] <= 86.67)
+			{
+				cout << "\n\nGrade Point Average is: 1.75";
+			}
+		
+	
+			else if (aveArr[i] >= 77.79 && aveArr[i] <= 82.22)
+			{
+				cout << "\n\nGrade Point Average is: 2.00";
+			}
+		
+
+			else if (aveArr[i] >= 73.34 && aveArr[i] <= 77.78)
+			{
+				cout << "\n\nGrade Point Average is: 2.25";
+			}
+		
+			else if (aveArr[i] >= 68.90 && aveArr[i] <= 73.33)
+			{
+				cout << "\n\nGrade Point Average is: 2.50";
+			}
+		
+
+			else if (aveArr[i] >= 64.45 && aveArr[i] <= 68.89)
+			{
+				cout << "\n\nGrade Point Average is: 2.75";
+			}
+		
+			else if (aveArr[i] >= 60.00 && aveArr[i] <= 64.44)
+			{
+				cout << "\n\nGrade Point Average is: 3.00";
+			}
+			else
+			{
+				cout<<"\n failed student";
+			}
+			
+		}
+    
+    
+	      _getch(); 
+	      return 0;
+}
