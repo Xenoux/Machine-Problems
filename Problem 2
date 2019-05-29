@@ -1,0 +1,75 @@
+#include <iostream>	//Preprocessor directive which comprises the descriptions of vital functions compulsory for the program's integrity, having the input and output as one of its components
+#include <conio.h>	//Preprocessor directive which includes the getch() function imperative to hold program execution
+#include <math.h>	//Preprocessor directive which contains the necessary mathematical functions which are essential for this specific program
+#include <string>	//Preprocessor directive which has the definitions required to run the string function
+#include <iomanip>	//Preprocessor directive which holds the specifications of crucial manipulators which aid in formatting the output in a particular manner
+
+using namespace std;
+
+int main()
+{
+	double side1, side2, side3, angle1, angle2, angle3, area, perimeter, halfOfPerimeter, apothem, circumcenter;	//Declaration of required double-type variables
+	double forApothem = 180 / 3;	//Declaration of a required double-type variable with a simple equation which is to be used for the calculation of the apothem
+	string typeOfTriangle1, typeOfTriangle2;	//Declaration of required string-type variables
+
+	cout << "[TRIANGLE CALCULATOR]" << endl << endl;
+	cout << "Please input the value of each side of your triangle." << endl;	//Prompts the user to input three values to correspond to each side of the triangle
+	cout << "Side 1: ";
+	cin  >> side1;	//Allocates a section where the user can input the value for the first side
+	cout << "Side 2: ";
+	cin  >> side2;	//Allocates a section where the user can input the value for the second side
+	cout << "Side 3: ";
+	cin  >> side3;	//Allocates a section where the user can input the value for the third side
+
+	if (side1 <= 0 || side2 <= 0 || side3 <= 0 || side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1)
+	{
+		cout << endl << "Invalid values!" << endl;	//Invalidates the inputs, for these conditions set off an illegitimate setup for a triangle
+		_getch();
+		return 0;	//Aborts the program due to inoperative inputs
+	}
+	
+	cout << setprecision(4);	//Sets the output to yield a return formatted to four (4) decimal places
+	angle1 = (acos((pow(side3, 2) - pow(side1, 2) - pow(side2, 2)) / - (2 * side1 * side2))) / 3.14159 * 180;	//Formula for the first interior angle
+	angle2 = (acos((pow(side1, 2) - pow(side2, 2) - pow(side3, 2)) / - (2 * side2 * side3))) / 3.14159 * 180;	//Formula for the second interior angle
+	angle3 = (acos((pow(side2, 2) - pow(side1, 2) - pow(side3, 2)) / - (2 * side1 * side3))) / 3.14159 * 180;	//Formula for the third interior angle
+
+	if (side1 == side2 && side2 == side3)
+		typeOfTriangle1 = "Equilateral Triangle";	//Identifies the triangle as an equilateral one, basing on the given side inputs if the requisite of having the values of all sides equal is met
+	else if (side1 != side2 && side1 != side3 && side2 != side3)
+		typeOfTriangle1 = "Scalene Triangle";	//Identifies the triangle as a scalene one, basing on the given side inputs if the requisite of having the values of all sides unequal is met
+	else
+		typeOfTriangle1 = "Isosceles Triangle";	//Identifies the triangle as an isosceles one if the preceding conditions were not met regardless of the inputs, as it would merely ultimately end up in this classification
+
+	perimeter = side1 + side2 + side3;	//Formula for the perimeter of a triangle
+	halfOfPerimeter = perimeter / 2;	//An equation that halves the perimeter which would be of substantial utility for the Heron's Formula, which is to be used to acquire the area of a triangle
+	area = sqrt(halfOfPerimeter * (halfOfPerimeter - side1) * (halfOfPerimeter - side2) * (halfOfPerimeter - side3));	//Formula for the area of a triangle which employs Heron's Formula
+
+	if (angle1 < 90 && angle2 < 90 && angle3 < 90)
+		typeOfTriangle2 = "Acute Triangle";	//Identifies the triangle as an acute one if the requisite of having the values of all interior angles below 90 degrees is met
+	else if (angle1 == 90 || angle2 == 90 || angle3 == 90)
+		typeOfTriangle2 = "Right Triangle";	//Identifies the triangle as an right one if the requisite of having a value of an interior angle at 90 degrees is met
+	else
+		typeOfTriangle2 = "Obtuse Triangle";	//Identifies the triangle as an obtuse one if the preceding conditions were not met regardless of the values, as it would merely ultimately end up in this classification
+
+	apothem = side1 / (2 * tan(forApothem));	//Formula for the apothem of a triangle
+	circumcenter = (side1 * side2 * side3) / sqrt((side1 + side2 + side3) * (-side1 + side2 + side3) * (side1 - side2 + side3) * (side1 + side2 - side3));	//Formula for the circumcenter of a triangle
+
+	cout << endl << endl << "[CALCULATION RESULTS]" << endl << endl;
+
+	cout << "Interior Angles: " << angle1 << ", " << angle2 << ", " << angle3 << endl;	//Outputs the obtained interior angles of the triangle
+	cout << "Type of Triangle According to Sides: " << typeOfTriangle1 << endl;	//Outputs the identified type of triangle according to sides
+	cout << "Type of Triangle According to Angles: " << typeOfTriangle2 << endl;	//Outputs the identified type of triangle according to angles
+	cout << "Area: " << area << endl; //Outputs the obtained area of the triangle
+	cout << "Perimeter: " << perimeter << endl;	//Outputs the obtained perimeter of the triangle
+
+	cout << "Apothem: ";
+	if (typeOfTriangle1 == "Equilateral Triangle")
+		cout << apothem << endl;	//Outputs the obtained apothem of the triangle if, and only if, the condition of having the triangle classified as an equilateral one is met
+	else
+		cout << "You need to have a regular polygon, or an equilateral triangle for this case, to find the apothem." << endl;	//Outputs no value for the apothem of the triangle and states that requisites were not met, hence the given return
+	
+	cout << "Circumcenter: " << circumcenter << endl; //Outputs the obtained circumcenter of the triangle
+
+	_getch();
+	return 0;
+}
